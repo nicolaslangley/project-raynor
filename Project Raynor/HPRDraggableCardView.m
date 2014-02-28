@@ -26,16 +26,18 @@
         offset = self.center;
         int actionIndicatorWidth = 45;
         int actionIndicatorHeight = 25;
-        int padding = 0;
         
         // Create and add image view
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, padding, self.frame.size.width, self.frame.size.height - padding)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         self.imageView.contentMode = UIViewContentModeScaleToFill;
         self.imageView.backgroundColor = [UIColor grayColor];
         [self addSubview:self.imageView];
         
+        // Get center of frame
+        CGPoint frameCenter = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+        
         // Create and add left label
-        self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width - actionIndicatorWidth - padding, frame.size.height/2-padding, actionIndicatorWidth, actionIndicatorHeight)];
+        self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameCenter.x - (actionIndicatorWidth / 2), frameCenter.y - (actionIndicatorHeight / 2), actionIndicatorWidth, actionIndicatorHeight)];
         self.leftLabel.text = @"NO";
         self.leftLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:20];
         self.leftLabel.textAlignment = NSTextAlignmentCenter;
@@ -44,7 +46,7 @@
         [self addSubview:self.leftLabel];
         
         // Create and add right label
-        self.rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width - actionIndicatorWidth - padding, frame.size.height/2-padding, actionIndicatorWidth, actionIndicatorHeight)];
+        self.rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameCenter.x - (actionIndicatorWidth / 2), frameCenter.y - (actionIndicatorHeight / 2), actionIndicatorWidth, actionIndicatorHeight)];
         self.rightLabel.text = @"YES";
         self.rightLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:20];
         self.rightLabel.textAlignment = NSTextAlignmentCenter;
@@ -69,31 +71,46 @@
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
-    // Translate image view position
-    CGPoint translation = [recognizer translationInView:self];
-    CGPoint imageViewPosition = self.imageView.center;
-    imageViewPosition.x += translation.x;
-    self.imageView.center = imageViewPosition;
-    [recognizer setTranslation:CGPointZero inView:self];
     
     // Handle logic for left and right swipes
     int actionIndicatorThreshold = 0;
-    int dragDistance = translation.x;
-    int translationDistance = dragDistance;
+    int translationDistance = recognizer.view.center.x - viewOrigin.x;
     if (translationDistance < 0) {
+        // Left swipe
         if (-translationDistance > actionIndicatorThreshold) {
             self.leftLabel.hidden = NO;
+            self.leftLabel.textColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008];
+            self.leftLabel.layer.borderColor = [[UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008]CGColor];
+            [self setTransform:CGAffineTransformMakeRotation
+             (((self.center.x - 160.0f)/160.0f) * (M_PI/8))];
         }
     } else {
+        // Right swipe
         if (translationDistance > actionIndicatorThreshold) {
             self.rightLabel.hidden = NO;
+            self.rightLabel.textColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008];
+            self.rightLabel.layer.borderColor = [[UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008]CGColor];
+            [self setTransform:CGAffineTransformMakeRotation
+             (((self.center.x - 160.0f)/160.0f) * (M_PI/8))];
         }
     }
+    // Translate view
+    CGPoint translation = [recognizer translationInView:self];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                         recognizer.view.center.y + translation.y);
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self];
     
+    // Return view to intitial state at end of gesture
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        self.imageView.center = viewOrigin;
-        self.leftLabel.hidden = YES;
-        self.rightLabel.hidden = YES;
+        [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            recognizer.view.center = offset;
+            self.leftLabel.hidden = YES;
+            self.rightLabel.hidden = YES;
+            [UIView beginAnimations:@"rotate" context:nil];
+            [UIView setAnimationDuration:0.5];
+            self.transform = CGAffineTransformMakeRotation(0);
+            [UIView commitAnimations];
+        } completion:nil];
     }
 }
 
