@@ -10,4 +10,10 @@
 
 @interface HPRViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
+- (IBAction)swipeLeft:(UISwipeGestureRecognizer *)sender;
+- (IBAction)swipeRight:(UISwipeGestureRecognizer *)sender;
+
 @end

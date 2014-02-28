@@ -18,6 +18,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self.imageView setUserInteractionEnabled:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,4 +27,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)swipeLeft:(UISwipeGestureRecognizer *)sender {
+    self.leftLabel.hidden = NO;
+}
+
+- (IBAction)swipeRight:(UISwipeGestureRecognizer *)sender {
+    self.rightLabel.hidden = NO;
+}
 @end
