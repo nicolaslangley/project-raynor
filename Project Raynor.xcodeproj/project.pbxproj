@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230DE4E318C12D780018F209 /* HPRDraggableCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 230DE4E218C12D780018F209 /* HPRDraggableCardView.m */; };
 		23DED98D18C02D68002CE6FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED98C18C02D68002CE6FF /* Foundation.framework */; };
 		23DED98F18C02D68002CE6FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED98E18C02D68002CE6FF /* CoreGraphics.framework */; };
 		23DED99118C02D68002CE6FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED99018C02D68002CE6FF /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		230DE4E118C12D780018F209 /* HPRDraggableCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPRDraggableCardView.h; sourceTree = "<group>"; };
+		230DE4E218C12D780018F209 /* HPRDraggableCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPRDraggableCardView.m; sourceTree = "<group>"; };
 		23DED98918C02D68002CE6FF /* Project Raynor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Raynor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DED98C18C02D68002CE6FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		23DED98E18C02D68002CE6FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,8 @@
 				23DED9A218C02D68002CE6FF /* HPRViewController.m */,
 				23DED9A418C02D68002CE6FF /* Images.xcassets */,
 				23DED99318C02D68002CE6FF /* Supporting Files */,
+				230DE4E118C12D780018F209 /* HPRDraggableCardView.h */,
+				230DE4E218C12D780018F209 /* HPRDraggableCardView.m */,
 			);
 			path = "Project Raynor";
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DED99918C02D68002CE6FF /* main.m in Sources */,
+				230DE4E318C12D780018F209 /* HPRDraggableCardView.m in Sources */,
 				23DED99D18C02D68002CE6FF /* HPRAppDelegate.m in Sources */,
 				23DED9A318C02D68002CE6FF /* HPRViewController.m in Sources */,
 			);
