@@ -19,10 +19,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HzS-yL-EW5">
                                 <rect key="frame" x="40" y="110" width="241" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="CoM-5Y-wm2" appends="YES" id="qfr-9y-Eoj"/>
-                                    <outletCollection property="gestureRecognizers" destination="QoZ-Dj-Y88" appends="YES" id="rLo-xE-DLg"/>
+                                    <outletCollection property="gestureRecognizers" destination="8Q2-IH-eko" appends="YES" id="P7R-ec-eBZ"/>
                                 </connections>
                             </imageView>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sce-PC-u7d">
@@ -51,16 +51,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="CoM-5Y-wm2">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="8Q2-IH-eko">
                     <connections>
-                        <action selector="swipeLeft:" destination="vXZ-lx-hvc" id="Ehy-Mx-9OV"/>
+                        <action selector="handlePan:" destination="vXZ-lx-hvc" id="gDj-4w-ndy"/>
                     </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="QoZ-Dj-Y88">
-                    <connections>
-                        <action selector="swipeRight:" destination="vXZ-lx-hvc" id="JNQ-cC-b3J"/>
-                    </connections>
-                </swipeGestureRecognizer>
+                </panGestureRecognizer>
             </objects>
         </scene>
     </scenes>

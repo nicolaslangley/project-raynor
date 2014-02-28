@@ -27,11 +27,39 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)swipeLeft:(UISwipeGestureRecognizer *)sender {
-    self.leftLabel.hidden = NO;
-}
-
-- (IBAction)swipeRight:(UISwipeGestureRecognizer *)sender {
-    self.rightLabel.hidden = NO;
+- (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+    // Get translation of gesture
+    CGPoint translation = [recognizer translationInView:self.view];
+    int minStartActionIndicator = 50;
+    int maxStartActionIndication = 30;
+    int minPerformAction = 30;
+    int maxPerformAction = 30;
+    int dragDistanceX = translation.x;
+    UIView *imView = recognizer.view;
+    if (dragDistanceX < 0) {
+        // Handle left drag
+        if (-dragDistanceX > minStartActionIndicator) {
+            // TODO: rotate image properly when this is selected
+            [imView setTransform:CGAffineTransformMakeRotation(((imView.center.x - 160.0f)/160.0f) * (M_PI/8))];
+            self.leftLabel.hidden = NO;
+        } else {
+            self.leftLabel.hidden = YES;
+        }
+    } else {
+        // Handle right drag
+        if (dragDistanceX > minStartActionIndicator) {
+            // TODO: rotate image properly when this is selected
+            [imView setTransform:CGAffineTransformMakeRotation(((imView.center.x - 160.0f)/160.0f) * (M_PI/8))];
+            self.rightLabel.hidden = NO;
+        } else {
+            self.rightLabel.hidden = YES;
+        }
+    }
+    
+    // Handle end of gesture
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        self.leftLabel.hidden = YES;
+        self.rightLabel.hidden = YES;
+    }
 }
 @end
