@@ -10,18 +10,21 @@
 
 @class RateView;
 
-@protocol HPRDraggableCardViewDelegate <NSObject>
+@protocol HPRCardViewDelegate <NSObject>
+- (void)processAction:(BOOL)result title:(NSString *)title cardTag:(int)cardTag;
 @end
 
-@interface HPRDraggableCardView : UIView <HPRDraggableCardViewDelegate>
+@interface HPRCardView : UIView <HPRCardViewDelegate>
 
 @property (nonatomic) UIImageView *imageView;
 @property (nonatomic) UILabel *leftLabel;
 @property (nonatomic) UILabel *rightLabel;
+@property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIPanGestureRecognizer *panGesture;
-@property (assign) id <HPRDraggableCardViewDelegate> delegate;
+@property (assign) id delegate;
 
 - (void)addGestureRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;
+- (void)performApproval:(BOOL)approval;
 
 @end

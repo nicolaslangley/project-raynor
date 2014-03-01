@@ -6,16 +6,17 @@
 //  Copyright (c) 2014 Hierarchy. All rights reserved.
 //
 
-#import "HPRDraggableCardView.h"
+#import "HPRCardView.h"
+#import "HPRViewController.h"
 
-@interface HPRDraggableCardView ()
+@interface HPRCardView ()
 {
     CGPoint offset;
     CGPoint viewOrigin;
 }
 @end
 
-@implementation HPRDraggableCardView
+@implementation HPRCardView
 
 
 - (id)initWithFrame:(CGRect)frame{
@@ -26,6 +27,7 @@
         offset = self.center;
         int actionIndicatorWidth = 45;
         int actionIndicatorHeight = 25;
+        int titleLabelHeight = 25;
         
         // Create and add image view
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -54,6 +56,12 @@
         self.rightLabel.hidden = YES;
         [self addSubview:self.rightLabel];
         
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,frame.size.width,titleLabelHeight)];
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+        self.titleLabel.backgroundColor = [UIColor blueColor];
+        [self addSubview:self.titleLabel];
+        
         // Set origin value
         viewOrigin = self.center;
     }
@@ -74,6 +82,7 @@
     
     // Handle logic for left and right swipes
     int actionIndicatorThreshold = 0;
+    int actionOccurenceThreshold = 120;
     int translationDistance = recognizer.view.center.x - viewOrigin.x;
     if (translationDistance < 0) {
         // Left swipe
@@ -83,6 +92,13 @@
             self.leftLabel.layer.borderColor = [[UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008]CGColor];
             [self setTransform:CGAffineTransformMakeRotation
              (((self.center.x - 160.0f)/160.0f) * (M_PI/8))];
+            // Perform action if over threshold
+            if(-translationDistance > actionOccurenceThreshold){
+                [self removeGestureRecognizer:self.panGesture];
+                [self performApproval:NO]; // Trigger action
+                [self removeFromSuperview];
+                return;
+            }
         }
     } else {
         // Right swipe
@@ -92,6 +108,13 @@
             self.rightLabel.layer.borderColor = [[UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008]CGColor];
             [self setTransform:CGAffineTransformMakeRotation
              (((self.center.x - 160.0f)/160.0f) * (M_PI/8))];
+            // Perform action if over threshold
+            if(translationDistance > actionOccurenceThreshold){
+                [self removeGestureRecognizer:self.panGesture];
+                [self performApproval:YES]; // Trigger action
+                [self removeFromSuperview];
+                return;
+            }
         }
     }
     // Translate view
@@ -111,6 +134,12 @@
             self.transform = CGAffineTransformMakeRotation(0);
             [UIView commitAnimations];
         } completion:nil];
+    }
+}
+
+- (void)performApproval:(BOOL)approval {
+    if ([self.delegate respondsToSelector:@selector(processAction: title: cardTag:)]) {
+        [self.delegate processAction:approval title:self.titleLabel.text cardTag:self.tag];
     }
 }
 
