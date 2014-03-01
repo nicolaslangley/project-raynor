@@ -133,7 +133,11 @@
     
     // Remove item from source and remove than re-populate subviews
     [cardSource removeObject:curObj];
-    [self.view.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    for (UIView *v in self.view.subviews) {
+        if ([v isMemberOfClass:[HPRCardView class]]) {
+            [v removeFromSuperview];
+        }
+    }
     [self populateCardStack:cardSource];
     
 }
