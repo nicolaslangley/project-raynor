@@ -7,9 +7,10 @@
 //
 
 #import <Parse/Parse.h>
+#import <MMDrawerController.h>
+#import <MMDrawerBarButtonItem.h>
 #import "HPRViewController.h"
 #import "HPRItemView.h"
-
 
 @interface HPRViewController ()
 {
@@ -44,6 +45,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - Methods for creating drawer views
+
+- (void)openLeftDrawer
+{
+    
+}
+
 
 #pragma mark - Methods for populating card data
 
@@ -93,7 +103,7 @@
     }
 }
 
-- (IBAction)reloadCardData:(UIButton *)sender {
+- (void)reloadCardData:(UIButton *)sender {
     PFQuery *query = [PFQuery queryWithClassName:@"Item"];
     //    query.limit = 2;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

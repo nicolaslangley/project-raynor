@@ -13,6 +13,6 @@
 
 - (void)populateCardData:(NSArray *)data;
 - (void)processApproval:(BOOL)approval identifier:(NSString *)identifier cardTag:(int)cardTag;
-- (IBAction)reloadCardData:(UIButton *)sender;
+- (void)reloadCardData:(UIButton *)sender;
 
 @end

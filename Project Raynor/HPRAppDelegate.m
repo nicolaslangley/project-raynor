@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 Hierarchy. All rights reserved.
 //
 
-#import "HPRAppDelegate.h"
 #import <Parse/Parse.h>
+#import <MMDrawerController.h>
+#import <MMDrawerBarButtonItem.h>
+#import "HPRAppDelegate.h"
+#import "HPRViewController.h"
+#import "HPRNavigationBarView.h"
 
 @implementation HPRAppDelegate
 
@@ -19,6 +23,38 @@
     [Parse setApplicationId:@"6Glf46uTWQeVaEkSpsxigbYoYGQ0eWUCEL9iKoBN"
                   clientKey:@"HiZ5o4kHzYLMwLQjWaHcM6M1uqVArM9OUtqmJxuT"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    // Setup drawer views and set root view
+    // Setup left drawer view
+    UIViewController * leftDrawer = [[UIViewController alloc] init];
+    
+    // Setup center drawer view controller
+    HPRViewController * center = [[HPRViewController alloc] init];
+    // Make navigation bar
+    HPRNavigationBarView * centerNavBar = [[HPRNavigationBarView alloc] init];
+    [center.view addSubview:centerNavBar];
+    // Add button
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button addTarget:self
+               action:@selector(reloadCardData:)
+     forControlEvents:UIControlEventTouchDown];
+    [button setTitle:@"Reload Data" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80.0, 420.0, 160.0, 40.0);
+    [center.view addSubview:button];
+    
+    // Setup
+    UIViewController * rightDrawer = [[UIViewController alloc] init];
+    MMDrawerController * drawerController = [[MMDrawerController alloc]
+                                             initWithCenterViewController:center
+                                             leftDrawerViewController:leftDrawer
+                                             rightDrawerViewController:rightDrawer];
+    center.view.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = drawerController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							
