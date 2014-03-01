@@ -14,7 +14,7 @@
 - (void)processAction:(BOOL)result title:(NSString *)title cardTag:(int)cardTag;
 @end
 
-@interface HPRCardView : UIView <HPRCardViewDelegate>
+@interface HPRCardView : UIView
 
 @property (nonatomic) UIImageView *imageView;
 @property (nonatomic) UILabel *leftLabel;

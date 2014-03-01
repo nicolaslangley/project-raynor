@@ -36,10 +36,9 @@
 
 - (void)populateCardStack:(NSArray *)data {
     
-    // Note: there must be at least 2 items in source
     if([data count] > 0) {
         if ([data count] == 1) {
-            HPRCardView *card = [[HPRCardView alloc] initWithFrame:CGRectMake(70,82,200,240)];
+            HPRCardView *card = [[HPRCardView alloc] initWithFrame:CGRectMake(62,130,200,240)];
             [card setDelegate:self];
             card.imageView.image = [UIImage imageNamed:[cardSource objectAtIndex:0]];
             card.tag = self.view.tag + 0;
@@ -48,7 +47,7 @@
             [self.view addSubview:card];
         } else {
             for(int i = 1; i >= 0 ;i--){
-                CGRect frame = (i%2 == 0) ?CGRectMake(70,82,200,240):CGRectMake(62,90,200,240);
+                CGRect frame = (i%2 == 0) ?CGRectMake(62,130,200,240):CGRectMake(70,120,200,240);
                 //Ignore hard coding
                 
                 HPRCardView *card = [[HPRCardView alloc] initWithFrame:frame];

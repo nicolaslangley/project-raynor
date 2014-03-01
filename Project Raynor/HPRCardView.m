@@ -73,7 +73,6 @@
     // Add recognizer to top view
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                           action:@selector(handlePan:)];
-    [self.panGesture setDelegate:self];
     [self.panGesture setMaximumNumberOfTouches:1];
     [self addGestureRecognizer:self.panGesture];
 }
@@ -82,7 +81,7 @@
     
     // Handle logic for left and right swipes
     int actionIndicatorThreshold = 0;
-    int actionOccurenceThreshold = 120;
+    int actionOccurenceThreshold = 100;
     int translationDistance = recognizer.view.center.x - viewOrigin.x;
     if (translationDistance < 0) {
         // Left swipe
@@ -136,6 +135,8 @@
         } completion:nil];
     }
 }
+
+#pragma mark - Delegate function calls
 
 - (void)performApproval:(BOOL)approval {
     if ([self.delegate respondsToSelector:@selector(processAction: title: cardTag:)]) {
