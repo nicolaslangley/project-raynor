@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 Hierarchy. All rights reserved.
 //
 
-#import "HPRViewController.h"
-#import "HPRCardView.h"
 #import <Parse/Parse.h>
+#import "HPRViewController.h"
+#import "HPRItemView.h"
+
 
 @interface HPRViewController ()
 {
-    NSMutableArray *cardSource;
+    NSMutableArray *cardData;
 }
 @end
 
@@ -29,8 +30,8 @@
         if (!error) {
             // The find succeeded.
             // Load objects into cardSource array and populate cards
-            cardSource = [objects mutableCopy];
-            [self populateCardStack:cardSource];
+            cardData = [objects mutableCopy];
+            [self populateCardData:cardData];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -44,11 +45,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)populateCardStack:(NSArray *)data {
+#pragma mark - Methods for populating card data
+
+- (void)populateCardData:(NSArray *)data {
     
     if([data count] > 0) {
         if ([data count] == 1) {
-            HPRCardView *card = [[HPRCardView alloc] initWithFrame:CGRectMake(62,130,200,240)];
+            HPRItemView *card = [[HPRItemView alloc] initWithFrame:CGRectMake(62,130,200,240)];
             [card setDelegate:self];
             PFObject *curItem = [data objectAtIndex:0];
             PFFile *userImageFile = curItem[@"image"];
@@ -68,7 +71,7 @@
                 CGRect frame = (i%2 == 0) ?CGRectMake(62,130,200,240):CGRectMake(70,120,200,240);
                 //Ignore hard coding
                 
-                HPRCardView *card = [[HPRCardView alloc] initWithFrame:frame];
+                HPRItemView *card = [[HPRItemView alloc] initWithFrame:frame];
                 [card setDelegate:self];
                 PFObject *curItem = [data objectAtIndex:i];
                 PFFile *userImageFile = curItem[@"image"];
@@ -95,10 +98,9 @@
     //    query.limit = 2;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
             // Load objects into cardSource array and populate cards
-            cardSource = [objects mutableCopy];
-            [self populateCardStack:cardSource];
+            cardData = [objects mutableCopy];
+            [self populateCardData:cardData];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -108,16 +110,17 @@
 
 #pragma mark - Delegate methods for HPRCardView
 
-- (void)processAction:(BOOL)result identifier:(NSString *)identifier cardTag:(int)cardTag {
-    // Remove card from array and repopulate stack
+- (void)processApproval:(BOOL)approval identifier:(NSString *)identifier cardTag:(int)cardTag {
+    // Get PFObject corresponding to removed card
     PFObject *curObj;
-    for (PFObject *pfo in cardSource) {
+    for (PFObject *pfo in cardData) {
         if (pfo.objectId == identifier) {
             curObj = pfo;
         }
     }
     
-    if (result == YES) {
+    // Handle approval result
+    if (approval == YES) {
         // Increment like count
         NSNumber *curCount = curObj[@"likeCount"];
         NSNumber *incCount = [NSNumber numberWithInt:[curCount intValue] + 1];
@@ -132,13 +135,13 @@
     }
     
     // Remove item from source and remove than re-populate subviews
-    [cardSource removeObject:curObj];
+    [cardData removeObject:curObj];
     for (UIView *v in self.view.subviews) {
-        if ([v isMemberOfClass:[HPRCardView class]]) {
+        if ([v isMemberOfClass:[HPRItemView class]]) {
             [v removeFromSuperview];
         }
     }
-    [self populateCardStack:cardSource];
+    [self populateCardData:cardData];
     
 }
 

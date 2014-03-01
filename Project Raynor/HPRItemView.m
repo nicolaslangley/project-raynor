@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Hierarchy. All rights reserved.
 //
 
-#import "HPRCardView.h"
+#import "HPRItemView.h"
 #import "HPRViewController.h"
 
-@interface HPRCardView ()
+@interface HPRItemView ()
 {
     CGPoint offset;
     CGPoint viewOrigin;
 }
 @end
 
-@implementation HPRCardView
+@implementation HPRItemView
 
 
 - (id)initWithFrame:(CGRect)frame{
@@ -67,6 +67,8 @@
     }
     return self;
 }
+
+#pragma mark - Methods for handling gestures
 
 - (void) addGestureRecognizer {
     
@@ -139,8 +141,11 @@
 #pragma mark - Delegate function calls
 
 - (void)performApproval:(BOOL)approval {
-    if ([self.delegate respondsToSelector:@selector(processAction: identifier: cardTag:)]) {
-        [self.delegate processAction:approval identifier:self.itemIdentifier cardTag:self.tag];
+    if ([self.delegate respondsToSelector:@selector(processApproval: identifier: cardTag:)]) {
+        // Suppress NSNumber to int conversion error
+        NSNumber *number = [NSNumber numberWithInteger: self.tag];
+        int tagVal = [number intValue];
+        [self.delegate processApproval:approval identifier:self.itemIdentifier cardTag:tagVal];
     }
 }
 

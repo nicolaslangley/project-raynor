@@ -11,10 +11,10 @@
 @class RateView;
 
 @protocol HPRCardViewDelegate <NSObject>
-- (void)processAction:(BOOL)result identifier:(NSString *)identifier cardTag:(int)cardTag;
+- (void)processApproval:(BOOL)approval identifier:(NSString *)identifier cardTag:(int)cardTag;
 @end
 
-@interface HPRCardView : UIView
+@interface HPRItemView : UIView
 
 @property (nonatomic) UIImageView *imageView;
 @property (nonatomic) UILabel *leftLabel;

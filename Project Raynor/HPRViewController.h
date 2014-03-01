@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HPRCardView.h"
+#import "HPRItemView.h"
 
 @interface HPRViewController : UIViewController <HPRCardViewDelegate>
 
-- (void)populateCardStack:(NSArray *)data;
-- (void)processAction:(BOOL)result identifier:(NSString *)identifier cardTag:(int)cardTag;
+- (void)populateCardData:(NSArray *)data;
+- (void)processApproval:(BOOL)approval identifier:(NSString *)identifier cardTag:(int)cardTag;
 - (IBAction)reloadCardData:(UIButton *)sender;
 
 @end
