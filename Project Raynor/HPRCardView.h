@@ -11,7 +11,7 @@
 @class RateView;
 
 @protocol HPRCardViewDelegate <NSObject>
-- (void)processAction:(BOOL)result title:(NSString *)title cardTag:(int)cardTag;
+- (void)processAction:(BOOL)result identifier:(NSString *)identifier cardTag:(int)cardTag;
 @end
 
 @interface HPRCardView : UIView
@@ -22,6 +22,7 @@
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIPanGestureRecognizer *panGesture;
 @property (assign) id delegate;
+@property (nonatomic) NSString *itemIdentifier;
 
 - (void)addGestureRecognizer;
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer;

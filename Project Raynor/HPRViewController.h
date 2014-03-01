@@ -12,6 +12,7 @@
 @interface HPRViewController : UIViewController <HPRCardViewDelegate>
 
 - (void)populateCardStack:(NSArray *)data;
-- (void)processAction:(BOOL)result title:(NSString *)title cardTag:(int)cardTag;
+- (void)processAction:(BOOL)result identifier:(NSString *)identifier cardTag:(int)cardTag;
+- (IBAction)reloadCardData:(UIButton *)sender;
 
 @end

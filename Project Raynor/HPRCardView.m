@@ -139,8 +139,8 @@
 #pragma mark - Delegate function calls
 
 - (void)performApproval:(BOOL)approval {
-    if ([self.delegate respondsToSelector:@selector(processAction: title: cardTag:)]) {
-        [self.delegate processAction:approval title:self.titleLabel.text cardTag:self.tag];
+    if ([self.delegate respondsToSelector:@selector(processAction: identifier: cardTag:)]) {
+        [self.delegate processAction:approval identifier:self.itemIdentifier cardTag:self.tag];
     }
 }
 
