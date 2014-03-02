@@ -178,10 +178,10 @@
             }];
         } else {
             for(int i = 1; i >= 0 ;i--){
-                CGRect frame = (i%2 == 0) ?CGRectMake(40,110,240,280):CGRectMake(50,100,240,280);
+                //CGRect frame = (i%2 == 0) ?CGRectMake(40,110,240,280):CGRectMake(50,100,240,280);
                 //Ignore hard coding
                 
-                HPRItemView *card = [[HPRItemView alloc] initWithFrame:frame];
+                HPRItemView *card = [[HPRItemView alloc] initWithFrame:CGRectMake(40,110,240,280)];
                 [card setDelegate:self];
                 PFObject *curItem = [data objectAtIndex:i];
                 PFFile *userImageFile = curItem[@"image"];

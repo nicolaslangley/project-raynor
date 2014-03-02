@@ -27,10 +27,16 @@
         offset = self.center;
         int actionIndicatorWidth = 45;
         int actionIndicatorHeight = 25;
-        int titleLabelHeight = 25;
+        // int titleLabelHeight = 25;
+        int border = 10;
+        
+        [self setBackgroundColor:self.tintColor];
         
         // Create and add image view
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0 + border,
+                                                                       0 + border,
+                                                                       self.frame.size.width - (border * 2),
+                                                                       self.frame.size.height - (border * 2))];
         self.imageView.contentMode = UIViewContentModeScaleToFill;
         self.imageView.backgroundColor = [UIColor grayColor];
         [self addSubview:self.imageView];
@@ -56,10 +62,11 @@
         self.rightActionLabel.hidden = YES;
         [self addSubview:self.rightActionLabel];
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,frame.size.width,titleLabelHeight)];
-        self.titleLabel.textColor = self.tintColor;
-        self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-        [self addSubview:self.titleLabel];
+        // Note: title label on card temporarily disabled
+        // self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,frame.size.width,titleLabelHeight)];
+        // self.titleLabel.textColor = self.tintColor;
+        // self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+        // [self addSubview:self.titleLabel];
         
         // Set origin value
         viewOrigin = self.center;
