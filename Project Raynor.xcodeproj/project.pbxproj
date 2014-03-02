@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		230DE4E318C12D780018F209 /* HPRItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 230DE4E218C12D780018F209 /* HPRItemView.m */; };
-		23BE701618C2720C00DF27E0 /* HPRNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BE701518C2720C00DF27E0 /* HPRNavigationBarView.m */; };
+		23BE701918C2B7CB00DF27E0 /* HPRLeftDrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BE701818C2B7CB00DF27E0 /* HPRLeftDrawerViewController.m */; };
 		23DED98D18C02D68002CE6FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED98C18C02D68002CE6FF /* Foundation.framework */; };
 		23DED98F18C02D68002CE6FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED98E18C02D68002CE6FF /* CoreGraphics.framework */; };
 		23DED99118C02D68002CE6FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED99018C02D68002CE6FF /* UIKit.framework */; };
@@ -16,7 +16,7 @@
 		23DED99918C02D68002CE6FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DED99818C02D68002CE6FF /* main.m */; };
 		23DED99D18C02D68002CE6FF /* HPRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DED99C18C02D68002CE6FF /* HPRAppDelegate.m */; };
 		23DED9A018C02D68002CE6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23DED99E18C02D68002CE6FF /* Main.storyboard */; };
-		23DED9A318C02D68002CE6FF /* HPRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DED9A218C02D68002CE6FF /* HPRViewController.m */; };
+		23DED9A318C02D68002CE6FF /* HPRCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DED9A218C02D68002CE6FF /* HPRCenterViewController.m */; };
 		23DED9A518C02D68002CE6FF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23DED9A418C02D68002CE6FF /* Images.xcassets */; };
 		23DED9AC18C02D68002CE6FF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED9AB18C02D68002CE6FF /* XCTest.framework */; };
 		23DED9AD18C02D68002CE6FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DED98C18C02D68002CE6FF /* Foundation.framework */; };
@@ -39,8 +39,8 @@
 /* Begin PBXFileReference section */
 		230DE4E118C12D780018F209 /* HPRItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPRItemView.h; sourceTree = "<group>"; };
 		230DE4E218C12D780018F209 /* HPRItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPRItemView.m; sourceTree = "<group>"; };
-		23BE701418C2720C00DF27E0 /* HPRNavigationBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPRNavigationBarView.h; sourceTree = "<group>"; };
-		23BE701518C2720C00DF27E0 /* HPRNavigationBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPRNavigationBarView.m; sourceTree = "<group>"; };
+		23BE701718C2B7CB00DF27E0 /* HPRLeftDrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPRLeftDrawerViewController.h; sourceTree = "<group>"; };
+		23BE701818C2B7CB00DF27E0 /* HPRLeftDrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPRLeftDrawerViewController.m; sourceTree = "<group>"; };
 		23DED98918C02D68002CE6FF /* Project Raynor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Raynor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DED98C18C02D68002CE6FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		23DED98E18C02D68002CE6FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -52,8 +52,8 @@
 		23DED99B18C02D68002CE6FF /* HPRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPRAppDelegate.h; sourceTree = "<group>"; };
 		23DED99C18C02D68002CE6FF /* HPRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPRAppDelegate.m; sourceTree = "<group>"; };
 		23DED99F18C02D68002CE6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		23DED9A118C02D68002CE6FF /* HPRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPRViewController.h; sourceTree = "<group>"; };
-		23DED9A218C02D68002CE6FF /* HPRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPRViewController.m; sourceTree = "<group>"; };
+		23DED9A118C02D68002CE6FF /* HPRCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPRCenterViewController.h; sourceTree = "<group>"; };
+		23DED9A218C02D68002CE6FF /* HPRCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPRCenterViewController.m; sourceTree = "<group>"; };
 		23DED9A418C02D68002CE6FF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		23DED9AA18C02D68002CE6FF /* Project RaynorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Project RaynorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23DED9AB18C02D68002CE6FF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -127,14 +127,14 @@
 				23DED99B18C02D68002CE6FF /* HPRAppDelegate.h */,
 				23DED99C18C02D68002CE6FF /* HPRAppDelegate.m */,
 				23DED99E18C02D68002CE6FF /* Main.storyboard */,
-				23DED9A118C02D68002CE6FF /* HPRViewController.h */,
-				23DED9A218C02D68002CE6FF /* HPRViewController.m */,
+				23DED9A118C02D68002CE6FF /* HPRCenterViewController.h */,
+				23DED9A218C02D68002CE6FF /* HPRCenterViewController.m */,
 				23DED9A418C02D68002CE6FF /* Images.xcassets */,
 				23DED99318C02D68002CE6FF /* Supporting Files */,
 				230DE4E118C12D780018F209 /* HPRItemView.h */,
 				230DE4E218C12D780018F209 /* HPRItemView.m */,
-				23BE701418C2720C00DF27E0 /* HPRNavigationBarView.h */,
-				23BE701518C2720C00DF27E0 /* HPRNavigationBarView.m */,
+				23BE701718C2B7CB00DF27E0 /* HPRLeftDrawerViewController.h */,
+				23BE701818C2B7CB00DF27E0 /* HPRLeftDrawerViewController.m */,
 			);
 			path = "Project Raynor";
 			sourceTree = "<group>";
@@ -305,10 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DED99918C02D68002CE6FF /* main.m in Sources */,
-				23BE701618C2720C00DF27E0 /* HPRNavigationBarView.m in Sources */,
 				230DE4E318C12D780018F209 /* HPRItemView.m in Sources */,
+				23BE701918C2B7CB00DF27E0 /* HPRLeftDrawerViewController.m in Sources */,
 				23DED99D18C02D68002CE6FF /* HPRAppDelegate.m in Sources */,
-				23DED9A318C02D68002CE6FF /* HPRViewController.m in Sources */,
+				23DED9A318C02D68002CE6FF /* HPRCenterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

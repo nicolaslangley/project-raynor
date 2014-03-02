@@ -39,22 +39,22 @@
         CGPoint frameCenter = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
         
         // Create and add left label
-        self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameCenter.x - (actionIndicatorWidth / 2), frameCenter.y - (actionIndicatorHeight / 2), actionIndicatorWidth, actionIndicatorHeight)];
-        self.leftLabel.text = @"NO";
-        self.leftLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:20];
-        self.leftLabel.textAlignment = NSTextAlignmentCenter;
-        self.leftLabel.backgroundColor = [UIColor clearColor];
-        self.leftLabel.hidden = YES;
-        [self addSubview:self.leftLabel];
+        self.leftActionLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameCenter.x - (actionIndicatorWidth / 2), frameCenter.y - (actionIndicatorHeight / 2), actionIndicatorWidth, actionIndicatorHeight)];
+        self.leftActionLabel.text = @"NO";
+        self.leftActionLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:20];
+        self.leftActionLabel.textAlignment = NSTextAlignmentCenter;
+        self.leftActionLabel.backgroundColor = [UIColor clearColor];
+        self.leftActionLabel.hidden = YES;
+        [self addSubview:self.leftActionLabel];
         
         // Create and add right label
-        self.rightLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameCenter.x - (actionIndicatorWidth / 2), frameCenter.y - (actionIndicatorHeight / 2), actionIndicatorWidth, actionIndicatorHeight)];
-        self.rightLabel.text = @"YES";
-        self.rightLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:20];
-        self.rightLabel.textAlignment = NSTextAlignmentCenter;
-        self.rightLabel.backgroundColor = [UIColor clearColor];
-        self.rightLabel.hidden = YES;
-        [self addSubview:self.rightLabel];
+        self.rightActionLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameCenter.x - (actionIndicatorWidth / 2), frameCenter.y - (actionIndicatorHeight / 2), actionIndicatorWidth, actionIndicatorHeight)];
+        self.rightActionLabel.text = @"YES";
+        self.rightActionLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:20];
+        self.rightActionLabel.textAlignment = NSTextAlignmentCenter;
+        self.rightActionLabel.backgroundColor = [UIColor clearColor];
+        self.rightActionLabel.hidden = YES;
+        [self addSubview:self.rightActionLabel];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,frame.size.width,titleLabelHeight)];
         self.titleLabel.textColor = [UIColor whiteColor];
@@ -88,9 +88,9 @@
     if (translationDistance < 0) {
         // Left swipe
         if (-translationDistance > actionIndicatorThreshold) {
-            self.leftLabel.hidden = NO;
-            self.leftLabel.textColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008];
-            self.leftLabel.layer.borderColor = [[UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008]CGColor];
+            self.leftActionLabel.hidden = NO;
+            self.leftActionLabel.textColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008];
+            self.leftActionLabel.layer.borderColor = [[UIColor colorWithRed:1.0 green:0 blue:0 alpha:-translationDistance*.008]CGColor];
             [self setTransform:CGAffineTransformMakeRotation
              (((self.center.x - 160.0f)/160.0f) * (M_PI/8))];
             // Perform action if over threshold
@@ -104,9 +104,9 @@
     } else {
         // Right swipe
         if (translationDistance > actionIndicatorThreshold) {
-            self.rightLabel.hidden = NO;
-            self.rightLabel.textColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008];
-            self.rightLabel.layer.borderColor = [[UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008]CGColor];
+            self.rightActionLabel.hidden = NO;
+            self.rightActionLabel.textColor = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008];
+            self.rightActionLabel.layer.borderColor = [[UIColor colorWithRed:0 green:1.0 blue:0 alpha:translationDistance*.008]CGColor];
             [self setTransform:CGAffineTransformMakeRotation
              (((self.center.x - 160.0f)/160.0f) * (M_PI/8))];
             // Perform action if over threshold
@@ -128,8 +128,8 @@
     if (recognizer.state == UIGestureRecognizerStateEnded) {
         [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             recognizer.view.center = offset;
-            self.leftLabel.hidden = YES;
-            self.rightLabel.hidden = YES;
+            self.leftActionLabel.hidden = YES;
+            self.rightActionLabel.hidden = YES;
             [UIView beginAnimations:@"rotate" context:nil];
             [UIView setAnimationDuration:0.5];
             self.transform = CGAffineTransformMakeRotation(0);

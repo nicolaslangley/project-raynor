@@ -12,7 +12,6 @@
 #import "HPRAppDelegate.h"
 #import "HPRCenterViewController.h"
 #import "HPRLeftDrawerViewController.h"
-#import "HPRNavigationBarView.h"
 
 @implementation HPRAppDelegate
 
@@ -42,9 +41,9 @@
     // Set drawer controller references
     self.window.rootViewController = drawerController;
     [center setDrawerController:drawerController];
+    [leftDrawer setDrawerController:drawerController];
     
-    // Set window color and make visible
-    self.window.backgroundColor = [UIColor whiteColor];
+    // Make window visible
     [self.window makeKeyAndVisible];
     
     return YES;

@@ -17,8 +17,8 @@
 @interface HPRItemView : UIView
 
 @property (nonatomic) UIImageView *imageView;
-@property (nonatomic) UILabel *leftLabel;
-@property (nonatomic) UILabel *rightLabel;
+@property (nonatomic) UILabel *leftActionLabel;
+@property (nonatomic) UILabel *rightActionLabel;
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIPanGestureRecognizer *panGesture;
 @property (assign) id delegate;

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MMDrawerController.h>
 
 @interface HPRLeftDrawerViewController : UIViewController
+
+@property MMDrawerController *drawerController;
+
+- (void)closeDrawer;
 
 @end

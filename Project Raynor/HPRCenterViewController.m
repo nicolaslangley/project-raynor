@@ -9,7 +9,6 @@
 #import <Parse/Parse.h>
 #import <MMDrawerBarButtonItem.h>
 #import "HPRCenterViewController.h"
-#import "HPRNavigationBarView.h"
 #import "HPRItemView.h"
 
 @protocol CenterViewController <NSObject>
@@ -31,10 +30,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    // Modify navigation bar by adding left drawer button
+    // Modify navigation bar by adding left drawer button and title
     MMDrawerBarButtonItem *leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self
                                                                                      action:@selector(openLeftDrawer)];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton];
+    [self.navigationItem setTitle:@"Project Raynor"];
+    
+    // Set background color of view
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     // Add button for reloading data
@@ -100,7 +102,7 @@
             }];
         } else {
             for(int i = 1; i >= 0 ;i--){
-                CGRect frame = (i%2 == 0) ?CGRectMake(62,130,200,240):CGRectMake(70,120,200,240);
+                CGRect frame = (i%2 == 0) ?CGRectMake(40,110,240,280):CGRectMake(50,100,240,280);
                 //Ignore hard coding
                 
                 HPRItemView *card = [[HPRItemView alloc] initWithFrame:frame];
