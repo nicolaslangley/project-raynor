@@ -10,6 +10,7 @@
 #import <MMDrawerBarButtonItem.h>
 #import "HPRCenterViewController.h"
 #import "HPRItemView.h"
+#import "HPRLogInViewController.h"
 
 @protocol CenterViewController <NSObject>
 
@@ -29,6 +30,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    HPRLogInViewController *logInController = [[HPRLogInViewController alloc] init];
+    logInController.delegate = self;
+    [logInController setFields: PFLogInFieldsUsernameAndPassword
+                              | PFLogInFieldsLogInButton
+                              | PFLogInFieldsSignUpButton
+                              | PFLogInFieldsDismissButton];
+    [self presentViewController:logInController animated:YES completion:nil];
     
     // Modify navigation bar by adding left drawer button and title
     MMDrawerBarButtonItem *leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self

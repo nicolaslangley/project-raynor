@@ -57,9 +57,8 @@
         [self addSubview:self.rightActionLabel];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,frame.size.width,titleLabelHeight)];
-        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.textColor = self.tintColor;
         self.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
-        self.titleLabel.backgroundColor = [UIColor blueColor];
         [self addSubview:self.titleLabel];
         
         // Set origin value
