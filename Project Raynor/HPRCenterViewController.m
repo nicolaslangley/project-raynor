@@ -85,7 +85,7 @@
     
     if([data count] > 0) {
         if ([data count] == 1) {
-            HPRItemView *card = [[HPRItemView alloc] initWithFrame:CGRectMake(62,130,200,240)];
+            HPRItemView *card = [[HPRItemView alloc] initWithFrame:CGRectMake(40,110,240,280)];
             [card setDelegate:self];
             PFObject *curItem = [data objectAtIndex:0];
             PFFile *userImageFile = curItem[@"image"];

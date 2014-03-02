@@ -24,8 +24,6 @@
                   clientKey:@"HiZ5o4kHzYLMwLQjWaHcM6M1uqVArM9OUtqmJxuT"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    
-    
     // Setup center & draw views
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     HPRLeftDrawerViewController * leftDrawer = [[HPRLeftDrawerViewController alloc] init];
@@ -37,6 +35,9 @@
     MMDrawerController * drawerController = [[MMDrawerController alloc]
                                              initWithCenterViewController:navController
                                              leftDrawerViewController:leftDrawer];
+    // Set gesture masks for drawer controller
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeBezelPanningCenterView];
+    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeBezelPanningCenterView];
     
     // Set drawer controller references
     self.window.rootViewController = drawerController;
