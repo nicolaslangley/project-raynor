@@ -236,12 +236,36 @@
         NSNumber *incCount = [NSNumber numberWithInt:[curCount intValue] + 1];
         curObj[@"likeCount"] = incCount;
         [curObj saveInBackground];
+        // Update liked count of user if signed in
+        PFUser *user = [PFUser currentUser];
+        if (user) {
+            NSArray *likedItemsArray = [user objectForKey:@"likedItems"];
+            if (likedItemsArray == nil) {
+                likedItemsArray = [[NSArray alloc] init];
+            }
+            NSMutableArray *likedItemsMutableArray = [likedItemsArray mutableCopy];
+            [likedItemsMutableArray addObject:curObj];
+            [user setObject:likedItemsMutableArray forKey:@"likedItems"];
+            [user save];
+        }
     } else {
         // Increment dislike count
         NSNumber *curCount = curObj[@"dislikeCount"];
         NSNumber *incCount = [NSNumber numberWithInt:[curCount intValue] + 1];
         curObj[@"dislikeCount"] = incCount;
         [curObj saveInBackground];
+        // Update disliked count of user if signed in
+        PFUser *user = [PFUser currentUser];
+        if (user) {
+            NSArray *dislikedItemsArray = [user objectForKey:@"dislikedItems"];
+            if (dislikedItemsArray == nil) {
+                dislikedItemsArray = [[NSArray alloc] init];
+            }
+            NSMutableArray *dislikedItemsMutableArray = [dislikedItemsArray mutableCopy];
+            [dislikedItemsMutableArray addObject:curObj];
+            [user setObject:dislikedItemsMutableArray forKey:@"dislikedItems"];
+            [user save];
+        }
     }
     
     // Remove item from source and remove than re-populate subviews

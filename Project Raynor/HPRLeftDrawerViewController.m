@@ -42,8 +42,7 @@
      forControlEvents:UIControlEventTouchDown];
     [button setTitle:@"Close Drawer" forState:UIControlStateNormal];
     button.frame = CGRectMake(80.0, 420.0, 160.0, 40.0);
-    [self.view addSubview:button];
-    
+    [self.view addSubview:button];    
     
 }
 

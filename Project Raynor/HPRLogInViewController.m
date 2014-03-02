@@ -57,6 +57,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    // Reset text of username and password fields to be empty
     [self.logInView.usernameField setText:@""];
     [self.logInView.passwordField setText:@""];
 }

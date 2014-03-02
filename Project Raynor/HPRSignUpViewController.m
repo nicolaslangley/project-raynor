@@ -55,6 +55,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    // Reset text of fields to be empty
     [self.signUpView.usernameField setText:@""];
     [self.signUpView.passwordField setText:@""];
     [self.signUpView.emailField setText:@""];
