@@ -7,24 +7,46 @@
 //
 
 #import <Parse/Parse.h>
-#import <MMDrawerController.h>
 #import <MMDrawerBarButtonItem.h>
-#import "HPRViewController.h"
+#import "HPRCenterViewController.h"
+#import "HPRNavigationBarView.h"
 #import "HPRItemView.h"
 
-@interface HPRViewController ()
+@protocol CenterViewController <NSObject>
+
+- (void)openLeftDrawer;
+
+@end
+
+@interface HPRCenterViewController ()
 {
     NSMutableArray *cardData;
 }
 @end
 
-@implementation HPRViewController
+@implementation HPRCenterViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    // Modify navigation bar by adding left drawer button
+    MMDrawerBarButtonItem *leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self
+                                                                                     action:@selector(openLeftDrawer)];
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    // Add button for reloading data
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button addTarget:self
+               action:@selector(reloadCardData:)
+     forControlEvents:UIControlEventTouchDown];
+    [button setTitle:@"Reload Data" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80.0, 420.0, 160.0, 40.0);
+    [self.view addSubview:button];
+    
+    // Download item objects stored online
     PFQuery *query = [PFQuery queryWithClassName:@"Item"];
     //    query.limit = 2;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -47,13 +69,13 @@
 }
 
 
-#pragma mark - Methods for creating drawer views
+#pragma mark - Methods for handling drawer opening and closing
 
-- (void)openLeftDrawer
-{
-    
+- (void)openLeftDrawer {
+    [self.drawerController openDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
+        NSLog(@"In open left drawer completion");
+    }];
 }
-
 
 #pragma mark - Methods for populating card data
 

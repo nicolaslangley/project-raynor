@@ -7,7 +7,7 @@
 //
 
 #import "HPRItemView.h"
-#import "HPRViewController.h"
+#import "HPRCenterViewController.h"
 
 @interface HPRItemView ()
 {

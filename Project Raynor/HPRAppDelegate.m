@@ -10,7 +10,8 @@
 #import <MMDrawerController.h>
 #import <MMDrawerBarButtonItem.h>
 #import "HPRAppDelegate.h"
-#import "HPRViewController.h"
+#import "HPRCenterViewController.h"
+#import "HPRLeftDrawerViewController.h"
 #import "HPRNavigationBarView.h"
 
 @implementation HPRAppDelegate
@@ -25,34 +26,25 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
+    
+    // Setup center & draw views
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    HPRLeftDrawerViewController * leftDrawer = [[HPRLeftDrawerViewController alloc] init];
+    HPRCenterViewController * center = [[HPRCenterViewController alloc] init];
     
-    // Setup drawer views and set root view
-    // Setup left drawer view
-    UIViewController * leftDrawer = [[UIViewController alloc] init];
-    
-    // Setup center drawer view controller
-    HPRViewController * center = [[HPRViewController alloc] init];
-    // Make navigation bar
-    HPRNavigationBarView * centerNavBar = [[HPRNavigationBarView alloc] init];
-    [center.view addSubview:centerNavBar];
-    // Add button
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button addTarget:self
-               action:@selector(reloadCardData:)
-     forControlEvents:UIControlEventTouchDown];
-    [button setTitle:@"Reload Data" forState:UIControlStateNormal];
-    button.frame = CGRectMake(80.0, 420.0, 160.0, 40.0);
-    [center.view addSubview:button];
-    
-    // Setup
-    UIViewController * rightDrawer = [[UIViewController alloc] init];
+    // Create navigation controller with root as center view
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:center];
     MMDrawerController * drawerController = [[MMDrawerController alloc]
-                                             initWithCenterViewController:center
-                                             leftDrawerViewController:leftDrawer
-                                             rightDrawerViewController:rightDrawer];
-    center.view.backgroundColor = [UIColor whiteColor];
+                                             initWithCenterViewController:navController
+                                             leftDrawerViewController:leftDrawer];
+    
+    // Set drawer controller references
     self.window.rootViewController = drawerController;
+    [center setDrawerController:drawerController];
+    
+    // Set window color and make visible
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     return YES;

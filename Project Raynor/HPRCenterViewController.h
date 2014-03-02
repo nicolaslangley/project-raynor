@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MMDrawerController.h>
 #import "HPRItemView.h"
 
-@interface HPRViewController : UIViewController <HPRCardViewDelegate>
+@interface HPRCenterViewController : UIViewController <HPRCardViewDelegate>
+
+@property MMDrawerController *drawerController;
 
 - (void)populateCardData:(NSArray *)data;
 - (void)processApproval:(BOOL)approval identifier:(NSString *)identifier cardTag:(int)cardTag;
 - (void)reloadCardData:(UIButton *)sender;
+- (void)openLeftDrawer;
 
 @end
