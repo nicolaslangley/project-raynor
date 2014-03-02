@@ -38,7 +38,9 @@
     [label sizeToFit];
     [self.logInView setLogo:label];
     [self.logInView.usernameField setBackgroundColor:[UIColor whiteColor]];
+    [self.logInView.usernameField setTextColor:color];
     [self.logInView.passwordField setBackgroundColor:[UIColor whiteColor]];
+    [self.logInView.passwordField setTextColor:color];
     [self.logInView.passwordForgottenButton setBackgroundImage:nil forState:UIControlStateNormal];
     [self.logInView.passwordForgottenButton setBackgroundColor:color];
     [self.logInView.logInButton setBackgroundImage:nil forState:UIControlStateNormal];
@@ -52,6 +54,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.logInView.usernameField setText:@""];
+    [self.logInView.passwordField setText:@""];
 }
 
 @end

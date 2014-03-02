@@ -37,11 +37,14 @@
     [label sizeToFit];
     [self.signUpView setLogo:label];
     [self.signUpView.usernameField setBackgroundColor:[UIColor whiteColor]];
+    [self.signUpView.usernameField setTextColor:color];
     [self.signUpView.passwordField setBackgroundColor:[UIColor whiteColor]];
+    [self.signUpView.passwordField setTextColor:color];
     [self.signUpView.signUpButton setBackgroundImage:nil forState:UIControlStateNormal];
     [self.signUpView.signUpButton setBackgroundColor:color];
     [self.signUpView.emailField setBackground:nil];
     [self.signUpView.emailField setBackgroundColor:[UIColor whiteColor]];
+    [self.signUpView.emailField setTextColor:color];
     
 }
 
@@ -49,6 +52,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.signUpView.usernameField setText:@""];
+    [self.signUpView.passwordField setText:@""];
+    [self.signUpView.emailField setText:@""];
 }
 
 @end

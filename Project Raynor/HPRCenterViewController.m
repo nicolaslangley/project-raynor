@@ -16,6 +16,7 @@
 @protocol CenterViewController <NSObject>
 
 - (void)openLeftDrawer;
+- (void)userStatusButton;
 
 @end
 
@@ -33,36 +34,49 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     
+    // Set up log in view controller
+    self.logInViewController = [[HPRLogInViewController alloc] init];
+    self.logInViewController.delegate = self;
+    [self.logInViewController setFields: PFLogInFieldsUsernameAndPassword
+     | PFLogInFieldsLogInButton
+     | PFLogInFieldsSignUpButton
+     | PFLogInFieldsDismissButton];
+    
+    // Set up sign up view controller
+    HPRSignUpViewController *signUpViewController = [[HPRSignUpViewController alloc] init];
+    [signUpViewController setDelegate:self];
+    [signUpViewController setFields:PFSignUpFieldsDefault];
+    
+    // Link the sign up view controller to log in view controller
+    [self.logInViewController setSignUpController:signUpViewController];
+    
     // Check if user is logged in
     if (![PFUser currentUser]) {
-        // Set up log in view controller
-        HPRLogInViewController *logInViewController = [[HPRLogInViewController alloc] init];
-        logInViewController.delegate = self;
-        [logInViewController setFields: PFLogInFieldsUsernameAndPassword
-                                  | PFLogInFieldsLogInButton
-                                  | PFLogInFieldsSignUpButton
-                                  | PFLogInFieldsDismissButton];
-        
-        // Set up sign up view controller
-        HPRSignUpViewController *signUpViewController = [[HPRSignUpViewController alloc] init];
-        [signUpViewController setDelegate:self];
-        [signUpViewController setFields:PFSignUpFieldsDefault];
-        
-        // Link the sign up view controller to log in view controller
-        [logInViewController setSignUpController:signUpViewController];
-        
         // Present log in view controllers
-        [self presentViewController:logInViewController animated:YES completion:nil];
+        [self presentViewController:self.logInViewController animated:YES completion:nil];
     }
     
-    // Modify navigation bar by adding left drawer button and title
+    // Modify navigation bar by adding left drawer button, log out button and title
     MMDrawerBarButtonItem *leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self
                                                                                      action:@selector(openLeftDrawer)];
+    UIBarButtonItem *logOutButton = [[UIBarButtonItem alloc] initWithTitle:@"Login"
+                                                                     style:UIBarButtonItemStyleDone
+                                                                    target:self
+                                                                    action:@selector(userStatusButton)];
+    [self.navigationItem setRightBarButtonItem:logOutButton];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton];
     [self.navigationItem setTitle:@"Project Raynor"];
     
+    
+    
     // Set background color of view
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    // Add label for displaying current user
+    self.userLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 470, 160, 40)];
+    [self.userLabel setTextColor:self.view.tintColor];
+    [self.userLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.view addSubview:self.userLabel];
     
     // Add button for reloading data
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -102,6 +116,43 @@
     [self.drawerController openDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
         NSLog(@"In open left drawer completion");
     }];
+}
+
+#pragma mark - Methods for handling user actions
+
+// Handle changing of user status
+- (void)userStatusButton {
+    if (![PFUser currentUser]) {
+        NSLog(@"Display loginviewcontroller");
+        [self presentViewController:self.logInViewController animated:YES completion:nil];
+    } else {
+        [PFUser logOut];
+        [self.userLabel setText:@"Not logged in"];
+        [[self.navigationItem rightBarButtonItem] setTitle:@"Login"];
+    }
+    
+}
+
+// Sent to the delegate when a PFUser is logged in.
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    // Dismiss the HPRLogInViewController
+    NSString *userLabelString = [NSString stringWithFormat:
+                                 @"User: %@",
+                                 [user username]];
+    [self.userLabel setText:userLabelString];
+    [[self.navigationItem rightBarButtonItem] setTitle:@"Logout"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// Sent to the delegate when a PFUser is signed up.
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+    // Dismiss the HPRSignUpViewController
+    NSString *userLabelString = [NSString stringWithFormat:
+                                 @"User: %@",
+                                 [user username]];
+    [self.userLabel setText:userLabelString];
+    [[self.navigationItem rightBarButtonItem] setTitle:@"Logout"];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Methods for populating card data

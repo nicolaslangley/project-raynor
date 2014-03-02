@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MMDrawerController.h>
+#import <Parse/Parse.h>
 #import "HPRItemView.h"
+#import "HPRLogInViewController.h"
 
-@interface HPRCenterViewController : UIViewController <HPRCardViewDelegate>
+@interface HPRCenterViewController : UIViewController <HPRCardViewDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property MMDrawerController *drawerController;
+@property HPRLogInViewController *logInViewController;
+@property UILabel *userLabel;
 
 - (void)populateCardData:(NSArray *)data;
 - (void)processApproval:(BOOL)approval identifier:(NSString *)identifier cardTag:(int)cardTag;
