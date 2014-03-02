@@ -11,6 +11,7 @@
 #import "HPRCenterViewController.h"
 #import "HPRItemView.h"
 #import "HPRLogInViewController.h"
+#import "HPRSignUpViewController.h"
 
 @protocol CenterViewController <NSObject>
 
@@ -31,13 +32,28 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    HPRLogInViewController *logInController = [[HPRLogInViewController alloc] init];
-    logInController.delegate = self;
-    [logInController setFields: PFLogInFieldsUsernameAndPassword
-                              | PFLogInFieldsLogInButton
-                              | PFLogInFieldsSignUpButton
-                              | PFLogInFieldsDismissButton];
-    [self presentViewController:logInController animated:YES completion:nil];
+    
+    // Check if user is logged in
+    if (![PFUser currentUser]) {
+        // Set up log in view controller
+        HPRLogInViewController *logInViewController = [[HPRLogInViewController alloc] init];
+        logInViewController.delegate = self;
+        [logInViewController setFields: PFLogInFieldsUsernameAndPassword
+                                  | PFLogInFieldsLogInButton
+                                  | PFLogInFieldsSignUpButton
+                                  | PFLogInFieldsDismissButton];
+        
+        // Set up sign up view controller
+        HPRSignUpViewController *signUpViewController = [[HPRSignUpViewController alloc] init];
+        [signUpViewController setDelegate:self];
+        [signUpViewController setFields:PFSignUpFieldsDefault];
+        
+        // Link the sign up view controller to log in view controller
+        [logInViewController setSignUpController:signUpViewController];
+        
+        // Present log in view controllers
+        [self presentViewController:logInViewController animated:YES completion:nil];
+    }
     
     // Modify navigation bar by adding left drawer button and title
     MMDrawerBarButtonItem *leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self

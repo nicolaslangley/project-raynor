@@ -27,9 +27,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    // Set view background color
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // Create custom attributes for log in view
+    // Customize attributes for log in view
     UIColor *color = self.view.tintColor;
     UILabel *label = [[UILabel alloc] init];
     label.text = @"Project Raynor";
