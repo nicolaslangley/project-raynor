@@ -12,6 +12,7 @@
 #import "HPRAppDelegate.h"
 #import "HPRCenterViewController.h"
 #import "HPRLeftDrawerViewController.h"
+#import "HPRTableViewController.h"
 
 @implementation HPRAppDelegate
 

@@ -12,6 +12,7 @@
 #import "HPRItemView.h"
 #import "HPRLogInViewController.h"
 #import "HPRSignUpViewController.h"
+#import "HPRTableViewController.h"
 
 @protocol CenterViewController <NSObject>
 
@@ -129,6 +130,7 @@
         [PFUser logOut];
         [self.userLabel setText:@"Not logged in"];
         [[self.navigationItem rightBarButtonItem] setTitle:@"Login"];
+        [[self.drawerController rightDrawerViewController] removeFromParentViewController];
     }
     
 }
@@ -141,6 +143,8 @@
                                  [user username]];
     [self.userLabel setText:userLabelString];
     [[self.navigationItem rightBarButtonItem] setTitle:@"Logout"];
+    HPRTableViewController *tableViewController = [[HPRTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [self.drawerController setRightDrawerViewController:tableViewController];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -152,6 +156,8 @@
                                  [user username]];
     [self.userLabel setText:userLabelString];
     [[self.navigationItem rightBarButtonItem] setTitle:@"Logout"];
+    HPRTableViewController *tableViewController = [[HPRTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    [self.drawerController setRightDrawerViewController:tableViewController];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
