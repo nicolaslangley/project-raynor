@@ -39,7 +39,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // This table displays items in the Todo class
+        // This table displays items in the Item class
         self.parseClassName = @"Item";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
